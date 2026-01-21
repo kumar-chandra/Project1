@@ -1,0 +1,67 @@
+#include "mainwindow.h"
+#include<QLabel>
+#include <QApplication>
+
+int main(int argc, char *argv[])
+{
+    QApplication a(argc, argv);
+    QLabel* label = new QLabel("hellow");
+    MainWindow w;
+    w.show();
+    label->show();
+    return a.exec();
+}
+
+1.signal and slot connections
+2.QLabel,multiple labels
+3.pushbuttons
+4.slider<->progressbar
+5.QMessageBox (#include<QMessageBox>,  (about, Qtabout, warning, critical, question, information, Standardbutton)qmlscene
+
+day 2
+
+
+1.qml engine
+2.qmlscene
+3.QStringListModel
+4.QStringList
+
+
+#include <QGuiApplication>
+ #include <QQmlEngine>
+ #include <QQmlContext> 
+#include <QQmlComponent>
+ #include <QStringListModel>
+ int main(int argc, char *argv[]) 
+{ QGuiApplication app(argc, argv);
+ QQmlEngine engine;
+ QQmlContext *context = new QQmlContext(engine.rootContext());
+ QStringList datalist;
+ datalist.append("Item 1");
+ datalist.append("Item 2"); 
+context->setContextProperty("myModel", QVariant::fromValue(datalist));
+ QQmlComponent component(&engine, QUrl("qrc:/main.qml"));
+ component.create(context);
+ return app.exec();
+ } 
+
+main.qml
+
+import QtQuick
+ import QtQuick.Controls
+ Window 
+{ 
+width: 640
+ height: 480
+ visible: true 
+title: qsTr("Hello World")
+ ListView { 
+anchors.fill: parent 
+model: myModel 
+delegate:
+ Text { 
+id: name text: modelData 
+} 
+} 
+}
+12345
